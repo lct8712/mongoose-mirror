@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "mongoose.h"
+#include "..\mongoose.h"
 
 // This function will be called by mongoose on every new request.
 static int begin_request_handler(struct mg_connection *conn) {
@@ -8,7 +8,10 @@ static int begin_request_handler(struct mg_connection *conn) {
   char content[100];
 
   // Prepare the message we're going to send
-  int content_length = snprintf(content, sizeof(content),
+  //int content_length = snprintf(content, sizeof(content),
+  //                              "Hello from mongoose! Remote port: %d",
+  //                              request_info->remote_port);
+  int content_length = sprintf(content,
                                 "Hello from mongoose! Remote port: %d",
                                 request_info->remote_port);
 

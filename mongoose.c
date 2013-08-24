@@ -479,7 +479,7 @@ static const char *config_options[] = {
   "listening_ports", "8080",
   "document_root",  NULL,
   "ssl_certificate", NULL,
-  "num_threads", "50",
+  "num_threads", "1",
   "run_as_user", NULL,
   "url_rewrite_patterns", NULL,
   "hide_files_patterns", NULL,
@@ -5237,6 +5237,33 @@ static void accept_new_connection(const struct socket *listener,
   }
 }
 
+const DWORD MS_VC_EXCEPTION = 0x406D1388;
+
+#pragma pack(push, 8)
+typedef struct tagTHREADNAME_INFO {
+  DWORD dwType; // Must be 0x1000.
+  LPCSTR szName; // Pointer to name (in user addr space).
+  DWORD dwThreadID; // Thread ID (-1=caller thread).
+  DWORD dwFlags; // Reserved for future use, must be zero.
+} THREADNAME_INFO;
+#pragma pack(pop)
+
+void set_thread_name(DWORD dwThreadID, char* threadName) {
+  THREADNAME_INFO info;
+  info.dwType = 0x1000;
+  info.szName = threadName;
+  info.dwThreadID = dwThreadID;
+  info.dwFlags = 0;
+
+  __try {
+    RaiseException( MS_VC_EXCEPTION, 0, sizeof(info)/sizeof(ULONG_PTR), (ULONG_PTR*)&info );
+  } __except(EXCEPTION_EXECUTE_HANDLER) { }
+}
+
+void set_current_thread_name(const char* thread_name) {
+  set_thread_name(GetCurrentThreadId(), thread_name);
+}
+
 static void *master_thread(void *thread_func_param) {
   struct mg_context *ctx = (struct mg_context *) thread_func_param;
   struct pollfd *pfd;
@@ -5245,6 +5272,7 @@ static void *master_thread(void *thread_func_param) {
   // Increase priority of the master thread
 #if defined(_WIN32)
   SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_ABOVE_NORMAL);
+  set_current_thread_name("master_thread");
 #endif
 
 #if defined(ISSUE_317)
