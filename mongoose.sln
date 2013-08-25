@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mongoose", "mongoose.vcproj", "{7C287BC4-ECBC-4B25-A6E0-79AC017FC1D2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "win_thread_learn", "win_thread_learn\win_thread_learn.vcproj", "{2A4ECDF3-72ED-4E57-BF59-7EB8DB694ED1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{7C287BC4-ECBC-4B25-A6E0-79AC017FC1D2}.Debug|Win32.Build.0 = Debug|Win32
 		{7C287BC4-ECBC-4B25-A6E0-79AC017FC1D2}.Release|Win32.ActiveCfg = Release|Win32
 		{7C287BC4-ECBC-4B25-A6E0-79AC017FC1D2}.Release|Win32.Build.0 = Release|Win32
+		{2A4ECDF3-72ED-4E57-BF59-7EB8DB694ED1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2A4ECDF3-72ED-4E57-BF59-7EB8DB694ED1}.Debug|Win32.Build.0 = Debug|Win32
+		{2A4ECDF3-72ED-4E57-BF59-7EB8DB694ED1}.Release|Win32.ActiveCfg = Release|Win32
+		{2A4ECDF3-72ED-4E57-BF59-7EB8DB694ED1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
