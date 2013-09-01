@@ -5,7 +5,7 @@
 
 #include "thread_api.h"
 
-const int kMaxBufferSize = 100;
+const int kMaxBufferSize = 5;
 
 typedef struct {
   pthread_mutex_t mutex;
@@ -18,7 +18,7 @@ typedef struct {
 } context_t;
 
 const int kProducerNumber = 1;
-const int kConsumerNumber = 3;
+const int kConsumerNumber = 1;
 
 void consumer_thread(void* data) {
   long thread_id = ::GetCurrentThreadId();

@@ -5,6 +5,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mongoose", "mongoose.vcproj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "win_thread_learn", "win_thread_learn\win_thread_learn.vcproj", "{2A4ECDF3-72ED-4E57-BF59-7EB8DB694ED1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_lib", "test_lib\test_lib.vcproj", "{EEF841FE-2709-40A7-AD98-34E09A6E7426}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_console", "test_console\test_console.vcproj", "{A7A8075B-1534-41DA-B2F8-07A857F7563F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_dll", "test_dll\test_dll.vcproj", "{E5DFCA22-A6AE-461E-B27A-7BC5C5D8F10A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server_learn", "server_learn\server_learn.vcproj", "{E170FA59-E646-4C5E-875C-72DD077E550D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +27,22 @@ Global
 		{2A4ECDF3-72ED-4E57-BF59-7EB8DB694ED1}.Debug|Win32.Build.0 = Debug|Win32
 		{2A4ECDF3-72ED-4E57-BF59-7EB8DB694ED1}.Release|Win32.ActiveCfg = Release|Win32
 		{2A4ECDF3-72ED-4E57-BF59-7EB8DB694ED1}.Release|Win32.Build.0 = Release|Win32
+		{EEF841FE-2709-40A7-AD98-34E09A6E7426}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EEF841FE-2709-40A7-AD98-34E09A6E7426}.Debug|Win32.Build.0 = Debug|Win32
+		{EEF841FE-2709-40A7-AD98-34E09A6E7426}.Release|Win32.ActiveCfg = Release|Win32
+		{EEF841FE-2709-40A7-AD98-34E09A6E7426}.Release|Win32.Build.0 = Release|Win32
+		{A7A8075B-1534-41DA-B2F8-07A857F7563F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A7A8075B-1534-41DA-B2F8-07A857F7563F}.Debug|Win32.Build.0 = Debug|Win32
+		{A7A8075B-1534-41DA-B2F8-07A857F7563F}.Release|Win32.ActiveCfg = Release|Win32
+		{A7A8075B-1534-41DA-B2F8-07A857F7563F}.Release|Win32.Build.0 = Release|Win32
+		{E5DFCA22-A6AE-461E-B27A-7BC5C5D8F10A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E5DFCA22-A6AE-461E-B27A-7BC5C5D8F10A}.Debug|Win32.Build.0 = Debug|Win32
+		{E5DFCA22-A6AE-461E-B27A-7BC5C5D8F10A}.Release|Win32.ActiveCfg = Release|Win32
+		{E5DFCA22-A6AE-461E-B27A-7BC5C5D8F10A}.Release|Win32.Build.0 = Release|Win32
+		{E170FA59-E646-4C5E-875C-72DD077E550D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E170FA59-E646-4C5E-875C-72DD077E550D}.Debug|Win32.Build.0 = Debug|Win32
+		{E170FA59-E646-4C5E-875C-72DD077E550D}.Release|Win32.ActiveCfg = Release|Win32
+		{E170FA59-E646-4C5E-875C-72DD077E550D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

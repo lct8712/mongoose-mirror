@@ -1,3 +1,6 @@
+#ifndef WIN_THREAD_LEARN_THREAD_AIP_H_
+#define WIN_THREAD_LEARN_THREAD_AIP_H_
+
 #include <windows.h>
 
 // pthread api
@@ -27,3 +30,5 @@ long thread_start(thread_func_t func, void* data);
 
 void set_thread_name(DWORD dwThreadID, const char* thread_name);
 void set_current_thread_name(const char* thread_name);
+
+#endif  // WIN_THREAD_LEARN_THREAD_AIP_H_

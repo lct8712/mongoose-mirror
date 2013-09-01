@@ -1270,8 +1270,15 @@ static void set_close_on_exec(SOCKET sock) {
   (void) SetHandleInformation((HANDLE) sock, HANDLE_FLAG_INHERIT, 0);
 }
 
-int mg_start_thread(mg_thread_func_t f, void *p) {
-  return (long)_beginthread((void (__cdecl *)(void *)) f, 0, p) == -1L ? -1 : 0;
+void set_thread_name(DWORD dwThreadID, char* threadName);
+
+int mg_start_thread(mg_thread_func_t f, void *arg, const char* thread_name) {
+  DWORD thread_id;
+  long handle = (long)_beginthreadex(NULL, 0, (unsigned (__stdcall *)(void *)) f, arg, 0, &thread_id);
+  if (thread_id > 0 && thread_name != NULL) {
+    set_thread_name(thread_id, thread_name);
+  }
+  return handle == -1L ? -1 : 0;
 }
 
 static HANDLE dlopen(const char *dll_name, int flags) {
@@ -4573,6 +4580,7 @@ static int set_ports_option(struct mg_context *ctx) {
 #if defined(USE_IPV6)
   int off = 0;
 #endif
+  // vec and so are initialized in parse_port_string
   struct vec vec;
   struct socket so, *ptr;
 
@@ -5272,7 +5280,7 @@ static void *master_thread(void *thread_func_param) {
   // Increase priority of the master thread
 #if defined(_WIN32)
   SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_ABOVE_NORMAL);
-  set_current_thread_name("master_thread");
+  //set_current_thread_name("master_thread");
 #endif
 
 #if defined(ISSUE_317)
@@ -5393,6 +5401,7 @@ struct mg_context *mg_start(const struct mg_callbacks *callbacks,
   ctx->callbacks = *callbacks;
   ctx->user_data = user_data;
 
+  // Read user defined options
   while (options && (name = *options++) != NULL) {
     if ((i = get_option_index(name)) == -1) {
       cry(fc(ctx), "Invalid option: %s", name);
@@ -5421,6 +5430,7 @@ struct mg_context *mg_start(const struct mg_callbacks *callbacks,
 
   // NOTE(lsm): order is important here. SSL certificates must
   // be initialized before listening ports. UID must be set last.
+  // Create socket then bind and listen in set_ports_option
   if (!set_gpass_option(ctx) ||
 #if !defined(NO_SSL)
       !set_ssl_option(ctx) ||
@@ -5448,11 +5458,13 @@ struct mg_context *mg_start(const struct mg_callbacks *callbacks,
   (void) pthread_cond_init(&ctx->sq_full, NULL);
 
   // Start master (listening) thread
-  mg_start_thread(master_thread, ctx);
+  mg_start_thread(master_thread, ctx, "master_thread");
 
   // Start worker threads
   for (i = 0; i < atoi(ctx->config[NUM_THREADS]); i++) {
-    if (mg_start_thread(worker_thread, ctx) != 0) {
+    char thread_name[32];
+    sprintf(thread_name, "worker_thread_%02d", i);
+    if (mg_start_thread(worker_thread, ctx, thread_name) != 0) {
       cry(fc(ctx), "Cannot start worker thread: %ld", (long) ERRNO);
     } else {
       ctx->num_threads++;
