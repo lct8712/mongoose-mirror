@@ -24,9 +24,11 @@ int pthread_cond_init(pthread_cond_t* cond) {
   cond->broadcast = ::CreateEvent(NULL, TRUE, FALSE, NULL);
   return (cond->signal != NULL && cond->broadcast != NULL) ? 0 : -1;
 }
+
 int pthread_cond_destroy(pthread_cond_t* cond) {
   return (::CloseHandle(cond->signal) && ::CloseHandle(cond->broadcast)) ? 0 : -1;
 }
+
 int pthread_cond_wait(pthread_cond_t* cond, pthread_mutex_t* mutex) {
   HANDLE handles[] = { cond->signal, cond->broadcast };
   // Same as pthread_unlock(mutex)

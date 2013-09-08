@@ -51,6 +51,10 @@ void start_server() {
     }
     printf("socket accepted\n");
 
+    // set socket as keep-alive
+    int on = 1;
+    setsockopt(accept_sock, SOL_SOCKET, SO_KEEPALIVE, (const char *) &on, sizeof(on));
+
     int received_len = recv(accept_sock, buf, sizeof(buf) - 1, 0);
     if (received_len > 0) {
       buf[received_len] = '\0';
@@ -58,15 +62,19 @@ void start_server() {
     }
 
     // TODO: send only when recv finished
-    char message[] = "hello";
+    char message[] = "HTTP/1.1 200 OK\r\n"
+                     "Content-Type: text/plain\r\n"
+                     "Content-Length:5\r\n"
+                     "\r\n"
+                     "123456";
     result = send(accept_sock, message, strlen(message), 0);
     if (result == INVALID_SOCKET) {
       printf("error send\n");
       closesocket(sock);
       return;
-    }    
+    }
     printf("socket send message: %s\n", message);
-    closesocket(accept_sock);
+    //closesocket(accept_sock);
   }
 
   closesocket(sock);

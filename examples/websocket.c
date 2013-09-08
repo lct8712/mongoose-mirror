@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "mongoose.h"
+#include "..\mongoose.h"
 
 static void websocket_ready_handler(struct mg_connection *conn) {
   static const char *message = "server ready";

@@ -3856,6 +3856,7 @@ static void handle_propfind(struct mg_connection *conn, const char *path,
   conn->num_bytes_sent += mg_printf(conn, "%s\n", "</d:multistatus>");
 }
 
+# define USE_WEBSOCKET
 #if defined(USE_WEBSOCKET)
 
 // START OF SHA-1 code
@@ -4673,7 +4674,7 @@ static void log_access(const struct mg_connection *conn) {
   fclose(fp);
 }
 
-// Verify given socket address against the ACL.
+// Verify given socket address against the ACL(Access Control List).
 // Return -1 if ACL is malformed, 0 if address is disallowed, 1 if allowed.
 static int check_acl(struct mg_context *ctx, uint32_t remote_ip) {
   int allowed, flag;
@@ -5216,6 +5217,7 @@ static int set_sock_timeout(SOCKET sock, int milliseconds) {
 
 static void accept_new_connection(const struct socket *listener,
                                   struct mg_context *ctx) {
+  // the accept socket
   struct socket so;
   char src_addr[IP_ADDR_STR_LEN];
   socklen_t len = sizeof(so.rsa);

@@ -15,12 +15,12 @@ typedef __int64 int64_t;
 #include <unistd.h>
 #endif // !_WIN32
 
-#include "mongoose.h"
+#include "..\mongoose.h"
 
 static int begin_request_handler(struct mg_connection *conn) {
   if (!strcmp(mg_get_request_info(conn)->uri, "/handle_post_request")) {
     mg_printf(conn, "%s", "HTTP/1.0 200 OK\r\n\r\n");
-    mg_upload(conn, "/tmp");
+    mg_upload(conn, "./tmp");
   } else {
     // Show HTML form. Make sure it has enctype="multipart/form-data" attr.
     static const char *html_form =

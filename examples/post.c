@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "mongoose.h"
+#include "..\mongoose.h"
 
 static const char *html_form =
   "<html><body>POST example."

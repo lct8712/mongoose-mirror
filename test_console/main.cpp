@@ -31,8 +31,12 @@ int main() {
   //printf("4 + 5 = %d\n", test_dll::EmptyClass::Add(4, 5));
   //printf("max of 3, 4: %d\n", test_dll::Max(3, 4));
   
-  assert(is_leagl_package_name("abcAAA.aaa"));
-  assert(!is_leagl_package_name("abc1AAA.aaa"));
+  //assert(is_leagl_package_name("abcAAA.aaa"));
+  //assert(!is_leagl_package_name("abc1AAA.aaa"));
+  
+  char a = 154;
+  int b = (int)a;
+  printf("%d\n", b);
 
   return 0;
 }
